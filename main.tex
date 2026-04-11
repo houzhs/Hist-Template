@@ -20,8 +20,25 @@
 
 %====================== 正文（有页眉页脚） ======================%
 \cleardoublepage   % 双面 
+% 重新定义页眉页脚
 \pagestyle{fancy} % 正文使用定义的页眉页脚
-\fancyhead[C]{\HISTHeader}  % 页眉 居中
+\fancyhf{}  % 先清空原有页眉页脚
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% \fancyhead[C]{\HISTHeader}  % 论文名称 页眉 居中
+% \fancyhead[C]{\zihao{5}\song\leftmark}  % 章节名称
+
+% 左页（偶数页）页眉：论文题目
+\fancyhead[CE]{\song\zihao{5}\HISTTitleCN}
+
+% 右页（奇数页）页眉：当前章标题
+\fancyhead[CO]{\song\zihao{5}\leftmark}
+
+% 页码：偶数页左，奇数页右
+\fancyfoot[LE,RO]{\song\zihao{5}\thepage}
+
+
 \pagenumbering{arabic}  % 页码编码方式
 \setcounter{page}{1}  % 页码起始编号
 

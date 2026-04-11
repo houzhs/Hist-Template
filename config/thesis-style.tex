@@ -1,6 +1,7 @@
 
 %====================== 常用宏包（排版/图表/列表） ======================%
 \usepackage{graphicx}
+\usepackage[absolute,overlay]{textpos}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{multirow}
@@ -21,7 +22,6 @@
 \usepackage{subcaption}
 \setlist[itemize]{itemsep=0.2em, topsep=0.4em}
 \setlist[enumerate]{itemsep=0.2em, topsep=0.4em}
-
 
 
 %====================== 固定长度下划线（封面/信息页） ======================%
@@ -96,49 +96,54 @@
 \fancyhf{}  %用于清空（重置）当前所有的页眉页脚设置。
 \pagestyle{fancy}
 % % 页眉内容：论文中文题目（可在 config/thesis-info.tex 修改）
-\fancyhead[C]{\HISTTitleCN}  % 页眉 居中
-\fancyfoot[C]{\song\zihao{5}\thepage}  % 页脚为页码  居中
-\renewcommand{\headrulewidth}{0.4pt}   % 设置页眉横线宽度
-\renewcommand{\footrulewidth}{0pt}     % 设置页脚横线宽度
+% \fancyhead[C]{\HISTTitleCN}  % 页眉 居中
+% \fancyhead[C]{\zihao{5}\song\leftmark}
+  % \fancyfoot[C]{}
+  % \fancyfoot[LE,RO]{\song\zihao{5}\thepage}
+% \fancyfoot[C]{\song\zihao{5}\thepage}  % 页脚为页码  居中
+% \renewcommand{\headrulewidth}{0.4pt}   % 设置页眉横线宽度
+% \renewcommand{\footrulewidth}{0pt}     % 设置页脚横线宽度
+
+\fancyhead[CE]{\song\zihao{5}\HISTTitleCN}
+\fancyhead[CO]{\song\zihao{5}\leftmark}
+\fancyfoot[LE,RO]{\song\zihao{5}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
 
 
 % 章节首页（plain）有页眉页脚与普通页保持一致   plain 默认样式
-\fancypagestyle{plain}{
-  \fancyhf{}
+  % \fancyhf{}
+  % \fancyhead[C]{\zihao{5}\song\leftmark}
   % \fancyhead[C]{\HISTTitleCN}
   % \fancyhead[C]{\zihao{5}\song\rightmark}
-  \fancyhead[C]{\zihao{5}\song\leftmark}
-  \fancyfoot[C]{\song\zihao{5}\thepage}
-  \renewcommand{\headrulewidth}{0.4pt}
+    % \fancyfoot[C]{\song\zihao{5}\thepage}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  % \fancyhead[C]{\zihao{5}\song\leftmark}  居中的
+  % \fancyfoot[C]{}
+
+  \fancyhead[CE]{\song\zihao{5}\HISTTitleCN}
+  \fancyhead[CE]{\song\zihao{5}\HISTHeader}
+  \fancyhead[CO]{\song\zihao{5}\leftmark}
+
+  \fancyfoot[LE,RO]{\song\zihao{5}\thepage}
+  % \renewcommand{\headrulewidth}{0.4pt}
   \renewcommand{\footrulewidth}{0pt}
 }
 
-% \makeatletter
-% % 章标题写入 \leftmark（用于页眉显示章）
-% \renewcommand{\chaptermark}[1]{%
-%   \markboth{第\thechapter 章\quad #1}{}%
-% }
-% % 节标题写入 \rightmark（如果你需要显示节）
-% \renewcommand{\sectionmark}[1]{%
-%   \markright{\thesection\quad #1}%
-% }
-% \makeatother
 
-
-% 前置部分专用：无页眉有页脚  自定义样式
-\fancypagestyle{plain-front}{
+% 前置部分专用：无页眉，仅显示页码
+\fancypagestyle{frontstyle}{
   \fancyhf{}
-  \fancyfoot[C]{\song\zihao{5}\thepage}
+  \fancyfoot[LE,RO]{\song\zihao{5}\thepage} % 奇数在右面，偶数在左面
+  % \fancyfoot[C]{\song\zihao{5}\thepage} % 摘要页码居中；
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
 
-\fancypagestyle{plain-none}{
-  \fancyhf{}
-  \fancyfoot[C]{\song\zihao{5}\thepage}
-  \renewcommand{\headrulewidth}{0pt}
-  \renewcommand{\footrulewidth}{0pt}
-}
+
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}  % 是否显示第几章  注释掉显示
 
 
 %====================== 表格常用列类 ======================%
@@ -148,6 +153,7 @@
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 %====================== 目录格式（小四 + 1.5倍行距）======================%
+
 
 \usepackage{tocloft}
 
@@ -239,7 +245,7 @@
 \setlength{\cftbeforelottitleskip}{0pt}
 \setlength{\cftafterlottitleskip}{18pt}
 
-%====================== 目录格式（小四 + 1.5倍行距）======================%
+
 \lstset{
   basicstyle=\ttfamily\small,      % 等宽字体
   % numbers=left,                    % 行号
@@ -255,6 +261,7 @@
   commentstyle=\color{gray},
   stringstyle=\color{red}
 }
+
 
 \usepackage{tikz}
 
